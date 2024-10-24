@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Loader2, Sparkles } from "lucide-react"
+import { useToast } from "@/components/ui/use-toast"
 
 interface CopyGeneratorProps {
-  onGenerate: () => void;
+  onGenerate?: () => void;
 }
 
 const CopyGenerator: React.FC<CopyGeneratorProps> = ({ onGenerate }) => {
@@ -13,6 +14,7 @@ const CopyGenerator: React.FC<CopyGeneratorProps> = ({ onGenerate }) => {
   const [organization, setOrganization] = useState('');
   const [mission, setMission] = useState('');
   const [generatedCopy, setGeneratedCopy] = useState('');
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +23,15 @@ const CopyGenerator: React.FC<CopyGeneratorProps> = ({ onGenerate }) => {
     setTimeout(() => {
       setGeneratedCopy("This is a placeholder for the AI-generated fundraising copy. It would describe the mission of " + organization + " and explain why donors should support their cause.");
       setLoading(false);
-      onGenerate();
+      
+      toast({
+        title: "Copy generated!",
+        description: "Your fundraising copy has been created.",
+      });
+      
+      if (onGenerate) {
+        onGenerate();
+      }
     }, 2000);
   };
 
