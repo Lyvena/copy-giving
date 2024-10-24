@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserPlus } from "lucide-react";
 
 const Header = () => {
+  const location = useLocation();
+  
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -12,8 +14,16 @@ const Header = () => {
           <span className="font-bold text-xl">AI-PGF</span>
         </Link>
         <nav className="flex items-center space-x-4">
-          <Button variant="ghost">About</Button>
-          <Button variant="ghost">Contact</Button>
+          <Link to="/">
+            <Button variant="ghost" className={location.pathname === '/' ? 'bg-accent' : ''}>
+              Home
+            </Button>
+          </Link>
+          <Link to="/contact">
+            <Button variant="ghost" className={location.pathname === '/contact' ? 'bg-accent' : ''}>
+              Contact
+            </Button>
+          </Link>
           <Link to="/auth">
             <Button>
               <UserPlus className="mr-2 h-4 w-4" />
