@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Settings } from "lucide-react";
 
 const Header = () => {
   const location = useLocation();
   
   return (
-    <header className="bg-white shadow-sm">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img src="/logo.svg" alt="AI-PGF Logo" className="h-8 w-8 text-primary" />
@@ -22,6 +22,11 @@ const Header = () => {
           <Link to="/contact">
             <Button variant="ghost" className={location.pathname === '/contact' ? 'bg-accent' : ''}>
               Contact
+            </Button>
+          </Link>
+          <Link to="/settings">
+            <Button variant="ghost" className={location.pathname === '/settings' ? 'bg-accent' : ''}>
+              <Settings className="h-4 w-4" />
             </Button>
           </Link>
           <Link to="/auth">
